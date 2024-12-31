@@ -1,1 +1,94 @@
-<p>employee-form works!</p>
+<div class="employee-form-container">
+  <h2>Add New Employee</h2>
+  
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input 
+        id="firstName"
+        type="text"
+        formControlName="firstName"
+        class="form-control"
+        [class.is-invalid]="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched">
+        First name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input 
+        id="lastName"
+        type="text"
+        formControlName="lastName"
+        class="form-control"
+        [class.is-invalid]="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched">
+        Last name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        id="email"
+        type="email"
+        formControlName="email"
+        class="form-control"
+        [class.is-invalid]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
+        Please enter a valid email address
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input 
+        id="position"
+        type="text"
+        formControlName="position"
+        class="form-control"
+        [class.is-invalid]="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched">
+        Position is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="department">Department</label>
+      <input 
+        id="department"
+        type="text"
+        formControlName="department"
+        class="form-control"
+        [class.is-invalid]="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
+        Department is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="hireDate">Hire Date</label>
+      <input 
+        id="hireDate"
+        type="date"
+        formControlName="hireDate"
+        class="form-control"
+        [class.is-invalid]="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched">
+        Hire date is required
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Save Employee</button>
+      <button type="button" class="btn btn-secondary" routerLink="/employees">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+.employee-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.employee-header {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.employee-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.position {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.employee-details p {
+  margin: 0.5rem 0;
+  color: #444;
+}

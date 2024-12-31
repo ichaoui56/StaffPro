@@ -10,9 +10,10 @@
         formControlName="firstName"
         class="form-control"
         [class.is-invalid]="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched"
+        (blur)="validateField('firstName')"
       >
       <div class="invalid-feedback" *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched">
-        First name is required
+        {{ getErrorMessage('firstName') }}
       </div>
     </div>
 
@@ -24,9 +25,10 @@
         formControlName="lastName"
         class="form-control"
         [class.is-invalid]="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched"
+        (blur)="validateField('lastName')"
       >
       <div class="invalid-feedback" *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched">
-        Last name is required
+        {{ getErrorMessage('lastName') }}
       </div>
     </div>
 
@@ -38,9 +40,10 @@
         formControlName="email"
         class="form-control"
         [class.is-invalid]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched"
+        (blur)="validateField('email')"
       >
       <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
-        Please enter a valid email address
+        {{ getErrorMessage('email') }}
       </div>
     </div>
 
@@ -52,9 +55,10 @@
         formControlName="position"
         class="form-control"
         [class.is-invalid]="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched"
+        (blur)="validateField('position')"
       >
       <div class="invalid-feedback" *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched">
-        Position is required
+        {{ getErrorMessage('position') }}
       </div>
     </div>
 
@@ -66,9 +70,10 @@
         formControlName="department"
         class="form-control"
         [class.is-invalid]="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched"
+        (blur)="validateField('department')"
       >
       <div class="invalid-feedback" *ngIf="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
-        Department is required
+        {{ getErrorMessage('department') }}
       </div>
     </div>
 
@@ -79,10 +84,15 @@
         type="date"
         formControlName="hireDate"
         class="form-control"
+        [max]="maxDate"
         [class.is-invalid]="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched"
+        (blur)="validateField('hireDate')"
       >
       <div class="invalid-feedback" *ngIf="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched">
-        Hire date is required
+        {{ getErrorMessage('hireDate') }}
+      </div>
+      <div class="form-text" *ngIf="employeeForm.get('hireDate')?.value">
+        Selected date: {{ employeeForm.get('hireDate')?.value | date:'mediumDate' }}
       </div>
     </div>
 

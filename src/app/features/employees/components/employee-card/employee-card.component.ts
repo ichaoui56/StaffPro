@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Employee } from '../../models/employee.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-card',
@@ -9,4 +10,22 @@ import { Employee } from '../../models/employee.model';
 })
 export class EmployeeCardComponent {
   @Input() employee!: Employee;
+
+  @Output() deleteEmployee = new EventEmitter<number>();
+
+  onDeleteEmployee(id : number ){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteEmployee.emit(id);
+      }
+    });
+  }
 }

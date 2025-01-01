@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-list',
@@ -25,5 +26,19 @@ export class EmployeeListComponent implements OnInit {
 
   addNewEmployee(): void {
     this.router.navigate(['/employees/new']);
+  }
+
+  handleDeleteEmployee(id : number) : void {
+    this.employeeService.deleteEmployee(id);
+    Swal.fire({
+      icon: 'success',
+      title: 'Deleted!',
+      text: 'Employee has been deleted.',
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true
+    });
   }
 }

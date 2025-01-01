@@ -8,4 +8,9 @@
     <p><strong>Department:</strong> {{ employee.department }}</p>
     <p><strong>Hire Date:</strong> {{ employee.hireDate | date:'mediumDate' }}</p>
   </div>
+  <div class="card-actions">
+    <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)">
+      Delete
+    </button>
+  </div>
 </div>

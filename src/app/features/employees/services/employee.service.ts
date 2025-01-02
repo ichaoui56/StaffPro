@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Employee } from '../models/employee.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class EmployeeService {
 
   addEmployee(employee: Employee): void {
     const employees = this.getEmployees();
-    employees.push(employee);
+    const employeeWithId = {
+      ...employee,
+      id: uuidv4()
+    };
+    employees.push(employeeWithId);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(employees));
     this.employeesSubject.next(employees);
   }
@@ -29,10 +34,25 @@ export class EmployeeService {
     return employees ? JSON.parse(employees) : [];
   }
 
-  deleteEmployee(id: number): void {
+  deleteEmployee(id: string): void {
     const employees = this.getEmployees();
-    const filtredEmployees = employees.filter(employee => employee.id !== id);
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(filtredEmployees));
-    this.employeesSubject.next(filtredEmployees);
+    const filteredEmployees = employees.filter(employee => employee.id !== id);
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(filteredEmployees));
+    this.employeesSubject.next(filteredEmployees);
+  }
+
+  getEmployeeById(id: string): Employee | undefined {
+    const employees = this.getEmployees();
+    return employees.find(emp => emp.id === id);
+  }
+
+  updateEmployee(updatedEmployee: Employee): void {
+    const employees = this.getEmployees();
+    const index = employees.findIndex(emp => emp.id === updatedEmployee.id);
+    if (index !== -1) {
+      employees[index] = updatedEmployee;
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(employees));
+      this.employeesSubject.next(employees);
+    }
   }
 }

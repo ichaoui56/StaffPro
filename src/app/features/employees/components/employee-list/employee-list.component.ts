@@ -28,7 +28,7 @@ export class EmployeeListComponent implements OnInit {
     this.router.navigate(['/employees/new']);
   }
 
-  handleDeleteEmployee(id : number) : void {
+  handleDeleteEmployee(id: string): void {
     this.employeeService.deleteEmployee(id);
     Swal.fire({
       icon: 'success',

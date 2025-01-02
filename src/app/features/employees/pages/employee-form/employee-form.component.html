@@ -1,5 +1,5 @@
 <div class="employee-form-container">
-  <h2>Add New Employee</h2>
+  <h2>{{ isEditMode ? 'Edit' : 'Add New' }} Employee</h2>
   
   <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
     <div class="form-group">
@@ -97,7 +97,9 @@
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Save Employee</button>
+      <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">
+        {{ isEditMode ? 'Update' : 'Save' }} Employee
+      </button>
       <button type="button" class="btn btn-secondary" routerLink="/employees">Cancel</button>
     </div>
   </form>

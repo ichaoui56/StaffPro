@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Employee } from '../../models/employee.model';
 import Swal from 'sweetalert2';
 
@@ -11,9 +12,15 @@ import Swal from 'sweetalert2';
 export class EmployeeCardComponent {
   @Input() employee!: Employee;
 
-  @Output() deleteEmployee = new EventEmitter<number>();
+  @Output() deleteEmployee = new EventEmitter<string>();
 
-  onDeleteEmployee(id : number ){
+  constructor(private router: Router) {}
+
+  onEditEmployee(id: string): void {
+    this.router.navigate(['/employees/edit', id]);
+  }
+
+  onDeleteEmployee(id: string): void {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

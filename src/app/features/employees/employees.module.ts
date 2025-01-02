@@ -6,13 +6,17 @@ import { EmployeesComponent } from './employees.component';
 import { EmployeeFormComponent } from './pages/employee-form/employee-form.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
+import { HighlightDirective } from '../../shared/directives/highlight.directive';
+import { HireDatePipe } from '../../shared/pipes/hire-date.pipe';
 
 @NgModule({
   declarations: [
     EmployeesComponent,
     EmployeeFormComponent,
     EmployeeListComponent,
-    EmployeeCardComponent
+    EmployeeCardComponent,
+    HighlightDirective,
+    HireDatePipe
   ],
   imports: [
     CommonModule,

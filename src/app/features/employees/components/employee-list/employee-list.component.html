@@ -1,22 +1,11 @@
-<div class="employee-list-container">
-  <div class="header">
-    <h2>Employee List</h2>
-    <button class="btn btn-primary" (click)="addNewEmployee()">
-      Add New Employee
-    </button>
-  </div>
+<div class="employee-list-header">
+  <h2>AllEmployees</h2>
+</div>
 
-  <div class="employee-grid" *ngIf="employees.length > 0; else noEmployees">
-    <app-employee-card 
-      *ngFor="let employee of employees" 
-      [employee]="employee"
-      (deleteEmployee)="handleDeleteEmployee($event)"
-    ></app-employee-card>
-  </div>
-
-  <ng-template #noEmployees>
-    <div class="no-employees">
-      <p>No employees found. Add your first employee!</p>
-    </div>
-  </ng-template>
+<div class="employee-grid">
+  <app-employee-card
+    *ngFor="let employee of employees"
+    [employee]="employee"
+    (deleteEmployee)="handleDeleteEmployee($event)">
+  </app-employee-card>
 </div>

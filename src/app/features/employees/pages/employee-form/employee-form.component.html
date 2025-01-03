@@ -1,106 +1,117 @@
-<div class="employee-form-container">
-  <h2>{{ isEditMode ? 'Edit' : 'Add New' }} Employee</h2>
-  
-  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input 
-        id="firstName"
-        type="text"
-        formControlName="firstName"
-        class="form-control"
-        [class.is-invalid]="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched"
-        (blur)="validateField('firstName')"
-      >
-      <div class="invalid-feedback" *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched">
-        {{ getErrorMessage('firstName') }}
+<div class="container">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <h4>Employee Information</h4>
+      <div class="input-group-icon" 
+           [class.error]="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched"
+           [class.valid]="employeeForm.get('firstName')?.valid && employeeForm.get('firstName')?.touched">
+        <input type="text" 
+               formControlName="firstName" 
+               placeholder="First Name"
+               (blur)="validateField('firstName')">
+        <div class="input-icon">
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="error-message" *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched">
+          {{ getErrorMessage('firstName') }}
+        </div>
+      </div>
+      <div class="input-group-icon" 
+           [class.error]="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched"
+           [class.valid]="employeeForm.get('lastName')?.valid && employeeForm.get('lastName')?.touched">
+        <input type="text" 
+               formControlName="lastName" 
+               placeholder="Last Name"
+               (blur)="validateField('lastName')">
+        <div class="input-icon">
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="error-message" *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched">
+          {{ getErrorMessage('lastName') }}
+        </div>
+      </div>
+      <div class="input-group-icon" 
+           [class.error]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched"
+           [class.valid]="employeeForm.get('email')?.valid && employeeForm.get('email')?.touched">
+        <input type="email" 
+               formControlName="email" 
+               placeholder="Email Address"
+               (blur)="validateField('email')">
+        <div class="input-icon">
+          <i class="fa fa-envelope"></i>
+        </div>
+        <div class="error-message" *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
+          {{ getErrorMessage('email') }}
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input 
-        id="lastName"
-        type="text"
-        formControlName="lastName"
-        class="form-control"
-        [class.is-invalid]="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched"
-        (blur)="validateField('lastName')"
-      >
-      <div class="invalid-feedback" *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched">
-        {{ getErrorMessage('lastName') }}
+    <div class="row">
+      <div class="col-half">
+        <h4>Position</h4>
+        <div class="input-group-icon" 
+             [class.error]="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched"
+             [class.valid]="employeeForm.get('position')?.valid && employeeForm.get('position')?.touched">
+          <input type="text" 
+                 formControlName="position" 
+                 placeholder="Job Position"
+                 (blur)="validateField('position')">
+          <div class="input-icon">
+            <i class="fa fa-briefcase"></i>
+          </div>
+          <div class="error-message" *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched">
+            {{ getErrorMessage('position') }}
+          </div>
+        </div>
+      </div>
+      <div class="col-half">
+        <h4>Department</h4>
+        <div class="input-group-icon" 
+             [class.error]="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched"
+             [class.valid]="employeeForm.get('department')?.valid && employeeForm.get('department')?.touched">
+          <input type="text" 
+                 formControlName="department" 
+                 placeholder="Department"
+                 (blur)="validateField('department')">
+          <div class="input-icon">
+            <i class="fa fa-building"></i>
+          </div>
+          <div class="error-message" *ngIf="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
+            {{ getErrorMessage('department') }}
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input 
-        id="email"
-        type="email"
-        formControlName="email"
-        class="form-control"
-        [class.is-invalid]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched"
-        (blur)="validateField('email')"
-      >
-      <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
-        {{ getErrorMessage('email') }}
+    <div class="row">
+      <h4>Hire Date</h4>
+      <div class="input-group-icon" 
+           [class.error]="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched"
+           [class.valid]="employeeForm.get('hireDate')?.valid && employeeForm.get('hireDate')?.touched">
+        <input type="date" 
+               formControlName="hireDate"
+               [max]="maxDate"
+               (blur)="validateField('hireDate')">
+        <div class="input-icon">
+          <i class="fa fa-calendar"></i>
+        </div>
+        <div class="error-message" *ngIf="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched">
+          {{ getErrorMessage('hireDate') }}
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="position">Position</label>
-      <input 
-        id="position"
-        type="text"
-        formControlName="position"
-        class="form-control"
-        [class.is-invalid]="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched"
-        (blur)="validateField('position')"
-      >
-      <div class="invalid-feedback" *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched">
-        {{ getErrorMessage('position') }}
+    <div class="row">
+      <div class="input-group">
+        <button type="submit" class="btn-submit" [disabled]="!employeeForm.valid">
+          <i class="fa fa-save"></i>
+          {{ isEditMode ? 'Update Employee' : 'Add Employee' }}
+        </button>
+        <button type="button" class="btn-cancel" (click)="onCancel()">
+          <i class="fa fa-times"></i>
+          Cancel
+        </button>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="department">Department</label>
-      <input 
-        id="department"
-        type="text"
-        formControlName="department"
-        class="form-control"
-        [class.is-invalid]="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched"
-        (blur)="validateField('department')"
-      >
-      <div class="invalid-feedback" *ngIf="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
-        {{ getErrorMessage('department') }}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="hireDate">Hire Date</label>
-      <input 
-        id="hireDate"
-        type="date"
-        formControlName="hireDate"
-        class="form-control"
-        [max]="maxDate"
-        [class.is-invalid]="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched"
-        (blur)="validateField('hireDate')"
-      >
-      <div class="invalid-feedback" *ngIf="employeeForm.get('hireDate')?.invalid && employeeForm.get('hireDate')?.touched">
-        {{ getErrorMessage('hireDate') }}
-      </div>
-      <div class="form-text" *ngIf="employeeForm.get('hireDate')?.value">
-        Selected date: {{ employeeForm.get('hireDate')?.value | date:'mediumDate' }}
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">
-        {{ isEditMode ? 'Update' : 'Save' }} Employee
-      </button>
-      <button type="button" class="btn btn-secondary" routerLink="/employees">Cancel</button>
     </div>
   </form>
 </div>

@@ -1,27 +1,38 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]',
   standalone: false
 })
 export class HighlightDirective {
-  @Input() highlightColor: string = '#f0f8ff'; 
-  private originalBackgroundColor: string;
+  private originalBoxShadow: string;
+  private originalTransform: string;
+  private originalBackground: string;
 
   constructor(private el: ElementRef) {
-    this.originalBackgroundColor = this.el.nativeElement.style.backgroundColor;
+    this.originalBoxShadow = this.el.nativeElement.style.boxShadow;
+    this.originalTransform = this.el.nativeElement.style.transform;
+    this.originalBackground = this.el.nativeElement.style.backgroundColor;
   }
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight(this.highlightColor);
+    this.highlight();
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.highlight(this.originalBackgroundColor);
+    this.reset();
   }
 
-  private highlight(color: string) {
-    this.el.nativeElement.style.backgroundColor = color;
-    this.el.nativeElement.style.transition = 'background-color 0.3s';
+  private highlight() {
+    this.el.nativeElement.style.boxShadow = '0 10px 20px rgba(52, 152, 219, 0.2), 0 6px 6px rgba(52, 152, 219, 0.1)';
+    this.el.nativeElement.style.transform = 'translateY(-5px)';
+    this.el.nativeElement.style.backgroundColor = '#e3f2fd';
+    this.el.nativeElement.style.transition = 'all 0.3s ease';
+  }
+
+  private reset() {
+    this.el.nativeElement.style.boxShadow = this.originalBoxShadow;
+    this.el.nativeElement.style.transform = this.originalTransform;
+    this.el.nativeElement.style.backgroundColor = this.originalBackground;
   }
 }

@@ -1,69 +1,218 @@
-.employee-form-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
+.container {
+  max-width: 38em;
+  padding: 2em 3em;
+  margin: 1em auto;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  box-sizing: border-box;
 }
 
-.employee-form-container h2 {
+h4 {
+  color: var(--primary-color);
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.row {
   margin-bottom: 2rem;
-  text-align: center;
+  width: 100%;
+  display: flow-root;
 }
 
-.form-group {
+.input-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.input-group-icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   margin-bottom: 1.5rem;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.form-control {
+input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  height: 3em;
+  padding: 0 1rem 0 3em;
+  line-height: 3em;
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  color: #495057;
+  box-sizing: border-box;
 }
 
-.form-control.is-invalid {
-  border-color: #dc3545;
+input::placeholder {
+  color: #adb5bd;
 }
 
-.invalid-feedback {
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
 }
 
-.form-actions {
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 3em;
+  height: 3em;
   display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  margin-top: 2rem;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.btn {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+.input-icon i {
+  color: #adb5bd;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+/* Valid state */
+.input-group-icon.valid input {
+  border-color: #2ecc71;
+}
+
+.input-group-icon.valid .input-icon i {
+  color: #2ecc71;
+}
+
+/* Error state */
+.input-group-icon.error input {
+  border-color: #e74c3c;
+}
+
+.input-group-icon.error .input-icon i {
+  color: #e74c3c;
+}
+
+.error-message {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
+  color: #e74c3c;
+  font-size: 0.85rem;
+  padding-left: 3em;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideDown 0.3s ease forwards;
+  width: 100%;
+}
+
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.col-half {
+  float: left;
+  width: 50%;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+.col-half:last-of-type {
+  padding-right: 0;
+}
+
+/* Buttons */
+.btn-submit, .btn-cancel {
+  padding: 1em 2em;
   border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
 }
 
-.btn-primary {
-  background-color: #007bff;
+.btn-submit {
+  background-color: var(--primary-color);
   color: white;
+  margin-right: 1rem;
 }
 
-.btn-primary:disabled {
-  background-color: #ccc;
+.btn-submit:hover:not(:disabled) {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.btn-submit:disabled {
+  opacity: 0.7;
   cursor: not-allowed;
 }
 
-.btn-secondary {
-  background-color: #6c757d;
+.btn-cancel {
+  background-color: #e74c3c;
   color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+/* Date input specific styles */
+input[type="date"] {
+  height: 3em;
+  padding-right: 1rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Responsive */
+@media only screen and (max-width: 540px) {
+  .container {
+    padding: 1.5em;
+  }
+
+  .col-half {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .btn-submit, .btn-cancel {
+    width: 100%;
+    margin: 0.5rem 0;
+    justify-content: center;
+  }
+
+  input {
+    font-size: 16px;
+  }
+}
+
+/* Clear floats */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

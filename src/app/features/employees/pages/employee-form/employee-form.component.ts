@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employee-form',
@@ -11,11 +12,12 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.css']
 })
-export class EmployeeFormComponent implements OnInit {
+export class EmployeeFormComponent implements OnInit, OnDestroy {
   employeeForm: FormGroup;
   maxDate: string;
   isEditMode = false;
   employeeId?: string;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private fb: FormBuilder,
@@ -28,15 +30,21 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.isEditMode = true;
-        this.employeeId = params['id'];
-        if (this.employeeId) {
-          this.loadEmployee(this.employeeId);
+    this.subscriptions.add(
+      this.route.params.subscribe(params => {
+        if (params['id']) {
+          this.isEditMode = true;
+          this.employeeId = params['id'];
+          if (this.employeeId) {
+            this.loadEmployee(this.employeeId);
+          }
         }
-      }
-    });
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private createForm(): FormGroup {
@@ -53,15 +61,29 @@ export class EmployeeFormComponent implements OnInit {
   getErrorMessage(controlName: string): string {
     const control = this.employeeForm.get(controlName);
     if (control?.errors) {
-      if (control.errors['required']) return `${controlName} is required`;
-      if (control.errors['minlength']) return `${controlName} must be at least ${control.errors['minlength'].requiredLength} characters`;
-      if (control.errors['email']) return 'Invalid email format';
+      if (control.errors['required']) {
+        return `${this.formatFieldName(controlName)} is required`;
+      }
+      if (control.errors['minlength']) {
+        return `${this.formatFieldName(controlName)} must be at least ${control.errors['minlength'].requiredLength} characters`;
+      }
+      if (control.errors['email']) {
+        return 'Please enter a valid email address';
+      }
       if (control.errors['pattern']) {
-        if (controlName === 'email') return 'Invalid email format';
-        return `${controlName} can only contain letters`;
+        if (controlName === 'email') {
+          return 'Please enter a valid email address';
+        }
+        return `${this.formatFieldName(controlName)} can only contain letters`;
       }
     }
     return '';
+  }
+
+  private formatFieldName(fieldName: string): string {
+    return fieldName
+      .replace(/([A-Z])/g, ' $1') // Insert space before capital letters
+      .replace(/^./, str => str.toUpperCase()); // Capitalize first letter
   }
 
   validateField(fieldName: string) {
@@ -148,5 +170,9 @@ export class EmployeeFormComponent implements OnInit {
       //   }
       // });
     }
+  }
+
+  onCancel(): void {
+    this.router.navigate(['/employees']);
   }
 }

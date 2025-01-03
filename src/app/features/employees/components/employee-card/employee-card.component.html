@@ -1,19 +1,21 @@
-<div class="employee-card" appHighlight>
-  <div class="employee-header">
+<div class="card" appHighlight>
+  <div class="card-content">
     <h3>{{ employee.firstName }} {{ employee.lastName }}</h3>
-    <span class="position">{{ employee.position }}</span>
-  </div>
-  <div class="employee-details">
-    <p><strong>Email:</strong> {{ employee.email }}</p>
-    <p><strong>Department:</strong> {{ employee.department }}</p>
-    <p><strong>Hire Date:</strong> {{ employee.hireDate | date:'mediumDate' }} ({{ employee.hireDate | hireDate }})</p>
-  </div>
-  <div class="card-actions">
-    <button class="btn btn-primary" (click)="onEditEmployee(employee.id)">
-      Edit
-    </button>
-    <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)">
-      Delete
-    </button>
+    <div class="employee-info">
+      <p><i class="fas fa-envelope"></i> {{ employee.email }}</p>
+      <p><i class="fas fa-briefcase"></i> {{ employee.position }}</p>
+      <p><i class="fas fa-building"></i> {{ employee.department }}</p>
+      <p><i class="fas fa-calendar-alt"></i> {{ employee.hireDate | date:'mediumDate' }}
+        <span class="hire-date">({{ employee.hireDate | hireDate }})</span>
+      </p>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-edit" (click)="onEditEmployee(employee.id)">
+        <i class="fas fa-edit"></i> Edit
+      </button>
+      <button class="btn btn-delete" (click)="onDeleteEmployee(employee.id)">
+        <i class="fas fa-trash"></i> Delete
+      </button>
+    </div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 import { EmployeesModule } from './features/employees/employees.module';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { EmployeesModule } from './features/employees/employees.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     EmployeesModule
   ],
   providers: [],

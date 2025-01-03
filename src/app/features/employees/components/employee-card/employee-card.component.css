@@ -1,60 +1,104 @@
-.employee-card {
-  background: white;
-  border-radius: 8px;
+.card {
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: all 0.3s ease;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
 }
 
-.employee-header {
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 60px;
+  opacity: 0.1;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.card h3 {
+  font-weight: 600;
+  color: var(--secondary-color);
   margin-bottom: 1rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 0.5rem;
+  font-size: 1.25rem;
 }
 
-.employee-header h3 {
-  margin: 0;
-  color: #333;
+.employee-info {
+  margin-bottom: 1.5rem;
 }
 
-.position {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.employee-details p {
+.employee-info p {
   margin: 0.5rem 0;
-  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.employee-info i {
+  color: var(--primary-color);
+  width: 20px;
+}
+
+.hire-date {
+  font-size: 0.9rem;
+  color: #888;
+  margin-left: 0.5rem;
 }
 
 .card-actions {
-  margin-top: 1rem;
   display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover .card-actions {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 6px;
   border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
   font-weight: 500;
 }
 
-.btn-primary {
-  background-color: #007bff;
+.btn-edit {
+  background-color: var(--primary-color);
   color: white;
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
+.btn-edit:hover {
+  background-color: #2980b9;
 }
 
-.btn-danger {
-  background-color: #dc3545;
+.btn-delete {
+  background-color: #e74c3c;
   color: white;
 }
 
-.btn-danger:hover {
-  background-color: #c82333;
+.btn-delete:hover {
+  background-color: #c0392b;
 }

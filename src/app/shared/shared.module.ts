@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { NavComponent } from './components/nav/nav.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HighlightDirective } from './directives/highlight.directive';
-import { FormatDatePipe } from './pipes/format-date.pipe';
-
-
 
 @NgModule({
   declarations: [
-    HighlightDirective,
-    FormatDatePipe
+    NavComponent,
+    FooterComponent,
+    HighlightDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
+  ],
+  exports: [
+    NavComponent,
+    FooterComponent,
+    HighlightDirective
   ]
 })
 export class SharedModule { }

@@ -1,59 +1,86 @@
 # StaffPro
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+## Description du projet
+L'application "Gestion des Employés avec Angular" permet de consulter, ajouter, modifier et supprimer des employés. L'objectif est de proposer une interface fluide, modulaire et réactive tout en optimisant les performances grâce à la persistance des données avec localStorage.
 
-## Development server
+## Fonctionnalités principales
+- **Gestion des employés** : Ajout, modification, suppression et affichage des employés.
+- **Optimisation des performances** : Utilisation de localStorage pour la persistance des données.
+- **Interface réactive** : Formulaires et composants modulaires pour une meilleure expérience utilisateur.
+- **Tests unitaires** : Validation des composants et services pour garantir leur bon fonctionnement.
 
-To start a local development server, run:
+## Tâches implémentées
+- Création du service `EmployeeService` pour gérer les opérations (CRUD) sur les employés avec stockage local.
+- Injection du service dans les composants pour la gestion des employés.
+- Implémentation de formulaires réactifs pour l'ajout et la modification des employés avec validations (email valide, champs obligatoires).
+- Configuration du routage et implémentation du **lazy loading** pour le module employés.
+- Implémentation d'une directive `highlight` pour mettre en surbrillance un employé sélectionné.
+- Création d'un **pipe** pour formater la date d’embauche des employés.
+- Utilisation d'**Observables** et d'opérateurs RxJS (`map`, `catchError`) pour gérer les flux de données.
+- Structure hiérarchique des composants : `EmployeeListComponent` (parent) et `EmployeeCardComponent` (enfant).
+- Passage de données entre composants via `@Input` et `@Output`.
+- Tests unitaires pour `EmployeeService` et les composants Angular (ajout, modification et affichage des employés).
 
+## Technologies utilisées
+- **Angular 18**
+- **TypeScript**
+- **HTML5 / CSS3**
+- **Angular CLI**
+- **RxJS (Observables, Opérateurs)**
+- **Services et Injection de dépendances**
+- **Formulaires réactifs et Template-driven**
+- **Routage et Lazy Loading**
+- **Directives et Pipes personnalisés**
+- **Gestion de l'état via localStorage**
+- **Tests unitaires avec Jasmine/Karma**
+
+## Installation et Exécution
+### Prérequis
+- Node.js (version 14+ recommandée)
+- Angular CLI installé globalement (`npm install -g @angular/cli`)
+
+### Installation du projet
+```bash
+# Cloner le dépôt
+git clone https://github.com/ichaoui56/StaffPro.git
+cd StaffPro
+
+# Installer les dépendances
+npm install
+```
+
+### Démarrer l'application
 ```bash
 ng serve
 ```
+L'application sera accessible sur `http://localhost:4200/`.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### Exécution des tests
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+## Structure du projet
+```plaintext
+src/
+|-- app/
+|   |-- core/
+|   |-- feature/
+|   |-- shared/
+|   |-- app-routing.module.ts
+|   |-- app.component.css
+|   |-- app.component.html
+|   |-- app.component.spec.ts
+|   |-- app.component.ts
+|   |-- app.module.ts
+|-- assets/
+|-- environments/
+|-- main.ts
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Auteur
+**Ilyas Chaoui**
 
-## Additional Resources
+## Licence
+Ce projet est sous licence MIT.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
